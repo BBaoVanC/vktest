@@ -1,11 +1,9 @@
 use anyhow::Context;
 use wayland_client::{protocol::wl_registry::WlRegistry, Connection, Dispatch};
 
-mod backend;
+mod render;
 
-struct State {
-
-}
+struct State;
 
 fn main() -> anyhow::Result<()> {
     let conn = Connection::connect_to_env().context("failed to get wayland connect")?;
@@ -14,7 +12,11 @@ fn main() -> anyhow::Result<()> {
     let queue_handle = event_queue.handle();
     let _registry = display.get_registry(&queue_handle, ());
 
-    event_queue.roundtrip(&mut State).context("error in roundtrip")?;
+    let vk_ctx = render::vulkan::Context::from_entry(ash::Entry::linked());
+
+    event_queue
+        .roundtrip(&mut State)
+        .context("error in roundtrip")?;
 
     Ok(())
 }

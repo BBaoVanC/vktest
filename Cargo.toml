@@ -5,6 +5,6 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.86"
-ash = "0.38.0"
+ash = { version = "0.38.0", features = ["linked", "debug", "std"], default-features = false }
 snafu = "0.8.4"
 wayland-client = "0.31.5"
