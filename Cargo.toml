@@ -1,0 +1,10 @@
+[package]
+name = "vktest"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.86"
+ash = "0.38.0"
+snafu = "0.8.4"
+wayland-client = "0.31.5"
